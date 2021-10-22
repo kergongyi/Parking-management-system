@@ -8,6 +8,8 @@
 #include "TPLPMSDlg.h"
 #include "afxdialogex.h"
 
+#include "AdminW.h"
+
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -27,6 +29,7 @@ public:
 
 	protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV 支持
+
 
 // 实现
 protected:
@@ -59,12 +62,14 @@ CTPLPMSDlg::CTPLPMSDlg(CWnd* pParent /*=nullptr*/)
 void CTPLPMSDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
+	DDX_Control(pDX, IDC_STATIC_SWTitle, m_static);//used to change the size of Title--Parking Here!!!!
 }
 
 BEGIN_MESSAGE_MAP(CTPLPMSDlg, CDialogEx)
 	ON_WM_SYSCOMMAND()
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
+	ON_BN_CLICKED(IDC_BUTTON1, &CTPLPMSDlg::OnBnClickedButton1)
 END_MESSAGE_MAP()
 
 
@@ -100,6 +105,11 @@ BOOL CTPLPMSDlg::OnInitDialog()
 	SetIcon(m_hIcon, FALSE);		// 设置小图标
 
 	// TODO: 在此添加额外的初始化代码
+
+	m_SWTitle.CreatePointFont(220, _T("黑体"), NULL);//set the new size for title
+	GetDlgItem(IDC_STATIC_SWTitle)->SetFont(&m_SWTitle);
+
+
 
 	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
 }
@@ -140,10 +150,19 @@ void CTPLPMSDlg::OnPaint()
 		// 绘制图标
 		dc.DrawIcon(x, y, m_hIcon);
 	}
-	else
-	{
-		CDialogEx::OnPaint();
-	}
+	//else
+	//{
+		//CDialogEx::OnPaint();
+	//}
+	CPaintDC dc(this);                           //Define the CPaint pointer
+	CBitmap   background;                            //Defind the bit map
+	background.LoadBitmap(IDB_BITMAP1);    
+	CBrush   brush; //The CBrush brush is mainly used to modify the filling content inside a closed graphic, including the fill color, fill shadow, and fill bitmap.
+	brush.CreatePatternBrush(&background);       ////import backgroud
+	CBrush* bgbrush = dc.SelectObject(&brush);
+	dc.Rectangle(0, 0, 600, 353);                  //size
+	dc.SelectObject(bgbrush);
+
 }
 
 //当用户拖动最小化窗口时系统调用此函数取得光标
@@ -151,5 +170,32 @@ void CTPLPMSDlg::OnPaint()
 HCURSOR CTPLPMSDlg::OnQueryDragIcon()
 {
 	return static_cast<HCURSOR>(m_hIcon);
+}
+
+
+
+void CTPLPMSDlg::OnBnClickedButton1()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	m_pConnection.CreateInstance(__uuidof(Connection)); //create a connection instance
+
+	_bstr_t strConnection ="Persist Security Info=False;Integrated Security=true;Initial Catalog = Parking;Data source = (localdb)\\mssqllocaldb";//connected string used to open database
+	m_pConnection->Open(strConnection, "", "", adModeUnknown);
+
+	CString strname;
+	CString strpassword;
+	int identity1 = ((CButton*)GetDlgItem(IDC_CHECK_Admin))->GetCheck();
+	int identity2 = ((CButton*)GetDlgItem(IDC_CHECK_User))->GetCheck();
+
+	GetDlgItemText(IDC_EDIT_Name, strname);
+	GetDlgItemText(IDC_EDIT_Password, strpassword);
+
+	//test code
+	if (strname == "Admin"&&strpassword=="4444"&&identity1==1&&identity2==0) {
+		AdminW dlg;
+		this->ShowWindow(SW_HIDE);
+		dlg.DoModal();
+	}
+	
 }
 

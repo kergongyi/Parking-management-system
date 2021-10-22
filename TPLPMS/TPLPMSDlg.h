@@ -25,10 +25,16 @@ public:
 protected:
 	HICON m_hIcon;
 
+	_ConnectionPtr m_pConnection; //connected object for database
+
 	// 生成的消息映射函数
 	virtual BOOL OnInitDialog();
 	afx_msg void OnSysCommand(UINT nID, LPARAM lParam);
 	afx_msg void OnPaint();
 	afx_msg HCURSOR OnQueryDragIcon();
 	DECLARE_MESSAGE_MAP()
+public:
+	afx_msg void OnBnClickedButton1();
+	CStatic m_static;
+	CFont m_SWTitle;//Title
 };
