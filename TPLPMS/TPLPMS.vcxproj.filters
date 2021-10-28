@@ -36,6 +36,9 @@
     <ClInclude Include="AdminW.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="PaymentW.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TPLPMS.cpp">
@@ -48,6 +51,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="AdminW.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="PaymentW.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -69,6 +75,12 @@
       <Filter>资源文件</Filter>
     </Image>
     <Image Include="res\login.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\bitmap2.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\Admin.bmp">
       <Filter>资源文件</Filter>
     </Image>
   </ItemGroup>

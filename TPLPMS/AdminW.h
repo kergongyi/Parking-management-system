@@ -3,7 +3,7 @@
 
 // AdminW 对话框
 
-class AdminW : public CDialog
+class AdminW : public CDialogEx
 {
 	DECLARE_DYNAMIC(AdminW)
 
@@ -22,4 +22,7 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	afx_msg void OnBnClickedButton1();
+	virtual BOOL OnInitDialog();
+	afx_msg void OnPaint();
+	afx_msg void OnBnClickedButton2();
 };

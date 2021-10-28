@@ -150,10 +150,7 @@ void CTPLPMSDlg::OnPaint()
 		// 绘制图标
 		dc.DrawIcon(x, y, m_hIcon);
 	}
-	//else
-	//{
-		//CDialogEx::OnPaint();
-	//}
+	//display the background picture
 	CPaintDC dc(this);                           //Define the CPaint pointer
 	CBitmap   background;                            //Defind the bit map
 	background.LoadBitmap(IDB_BITMAP1);    
@@ -177,25 +174,51 @@ HCURSOR CTPLPMSDlg::OnQueryDragIcon()
 void CTPLPMSDlg::OnBnClickedButton1()
 {
 	// TODO: 在此添加控件通知处理程序代码
-	m_pConnection.CreateInstance(__uuidof(Connection)); //create a connection instance
+	HRESULT hr;
+	hr = CoInitialize(NULL);
 
-	_bstr_t strConnection ="Persist Security Info=False;Integrated Security=true;Initial Catalog = Parking;Data source = (localdb)\\mssqllocaldb";//connected string used to open database
-	m_pConnection->Open(strConnection, "", "", adModeUnknown);
+	m_pConnection.CreateInstance(__uuidof(Connection)); 
+	record.CreateInstance(__uuidof(Recordset));//create a set used to read database
 
-	CString strname;
-	CString strpassword;
-	int identity1 = ((CButton*)GetDlgItem(IDC_CHECK_Admin))->GetCheck();
-	int identity2 = ((CButton*)GetDlgItem(IDC_CHECK_User))->GetCheck();
+		_bstr_t strConnection = "Provider=SQLOLEDB.1;Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=Parking;Data Source=LAPTOP-O4FIFM3Q";//connecting string used to connect database
+		if (SUCCEEDED(m_pConnection->Open(strConnection, _T(""), _T(""), adConnectUnspecified)))//open database
+		{
+			AfxMessageBox(_T("Succeed to connect database"));
+		}
 
-	GetDlgItemText(IDC_EDIT_Name, strname);
-	GetDlgItemText(IDC_EDIT_Password, strpassword);
+		record = m_pConnection->Execute("SELECT * FROM dbo.Admin", NULL, adCmdText);
+        
+		int login = 0;
+		CString strname;
+		CString strpassword;
+		CString DBname;
+		CString DBpassword;
+		int identity1 = ((CButton*)GetDlgItem(IDC_CHECK_Admin))->GetCheck();//check boxx
+		int identity2 = ((CButton*)GetDlgItem(IDC_CHECK_User))->GetCheck();
 
-	//test code
-	if (strname == "Admin"&&strpassword=="4444"&&identity1==1&&identity2==0) {
-		AdminW dlg;
-		this->ShowWindow(SW_HIDE);
-		dlg.DoModal();
-	}
-	
+		while (!record->adoEOF)
+		{
+			DBname = record->GetCollect(_T("Name"));
+			DBpassword = record->GetCollect(_T("Password"));
+			//get name and password from database
+
+			GetDlgItemText(IDC_EDIT_Name, strname);
+			GetDlgItemText(IDC_EDIT_Password, strpassword);
+			if (strname == DBname && strpassword == DBpassword && identity1 == 1 && identity2 == 0) {
+				login = 1;
+				AdminW dlg;
+				this->ShowWindow(SW_HIDE);
+				dlg.DoModal();
+				break;
+			}
+			record->MoveNext();
+		}
+		if (login == 0) {
+			AfxMessageBox(_T("Name or Password is wrong"));
+		}
+		record->Close();
+		m_pConnection->Close();
+		//close connection
+		CoUninitialize();
 }
 

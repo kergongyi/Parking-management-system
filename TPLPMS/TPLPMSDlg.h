@@ -26,6 +26,7 @@ protected:
 	HICON m_hIcon;
 
 	_ConnectionPtr m_pConnection; //connected object for database
+	_RecordsetPtr record;//record set of database
 
 	// 生成的消息映射函数
 	virtual BOOL OnInitDialog();
