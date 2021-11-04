@@ -9,6 +9,7 @@
 #include "afxdialogex.h"
 
 #include "AdminW.h"
+#include "UserW.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -174,6 +175,14 @@ HCURSOR CTPLPMSDlg::OnQueryDragIcon()
 void CTPLPMSDlg::OnBnClickedButton1()
 {
 	// TODO: 在此添加控件通知处理程序代码
+
+	int identity1 = ((CButton*)GetDlgItem(IDC_CHECK_Admin))->GetCheck();//check boxx
+	int identity2 = ((CButton*)GetDlgItem(IDC_CHECK_User))->GetCheck();
+
+	if ((identity1 == 1 && identity2 == 1) || (identity1 == 0 && identity2 == 0)) {
+		AfxMessageBox(_T("Identity wrong"));
+		return;
+	}
 	HRESULT hr;
 	hr = CoInitialize(NULL);
 
@@ -186,33 +195,44 @@ void CTPLPMSDlg::OnBnClickedButton1()
 			AfxMessageBox(_T("Succeed to connect database"));
 		}
 
-		record = m_pConnection->Execute("SELECT * FROM dbo.Admin", NULL, adCmdText);
+		if (identity1 == 1 && identity2 == 0) {
+			record = m_pConnection->Execute("SELECT * FROM dbo.Admin", NULL, adCmdText);
+		}
+		else if (identity1 == 0 && identity2 == 1) {
+			record = m_pConnection->Execute("SELECT * FROM dbo.[User]", NULL, adCmdText);
+		}
         
 		int login = 0;
 		CString strname;
 		CString strpassword;
 		CString DBname;
 		CString DBpassword;
-		int identity1 = ((CButton*)GetDlgItem(IDC_CHECK_Admin))->GetCheck();//check boxx
-		int identity2 = ((CButton*)GetDlgItem(IDC_CHECK_User))->GetCheck();
+		
+			while (!record->adoEOF)
+			{
+				DBname = record->GetCollect(_T("Name"));
+				DBpassword = record->GetCollect(_T("Password"));
+				//get name and password from database
 
-		while (!record->adoEOF)
-		{
-			DBname = record->GetCollect(_T("Name"));
-			DBpassword = record->GetCollect(_T("Password"));
-			//get name and password from database
-
-			GetDlgItemText(IDC_EDIT_Name, strname);
-			GetDlgItemText(IDC_EDIT_Password, strpassword);
-			if (strname == DBname && strpassword == DBpassword && identity1 == 1 && identity2 == 0) {
-				login = 1;
-				AdminW dlg;
-				this->ShowWindow(SW_HIDE);
-				dlg.DoModal();
-				break;
+				GetDlgItemText(IDC_EDIT_Name, strname);
+				GetDlgItemText(IDC_EDIT_Password, strpassword);
+				if (strname == DBname && strpassword == DBpassword && identity1 == 1 && identity2 == 0) {
+					login = 1;
+					AdminW dlg;
+					this->ShowWindow(SW_HIDE);
+					dlg.DoModal();
+					break;
+				}
+				if (strname == DBname && strpassword == DBpassword && identity1 == 0 && identity2 == 1) {
+					login = 1;
+					UserW dlg;
+					this->ShowWindow(SW_HIDE);
+					dlg.DoModal();
+					break;
+				}
+				record->MoveNext();
 			}
-			record->MoveNext();
-		}
+		
 		if (login == 0) {
 			AfxMessageBox(_T("Name or Password is wrong"));
 		}

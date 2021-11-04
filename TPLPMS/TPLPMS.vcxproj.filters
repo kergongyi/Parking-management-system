@@ -39,6 +39,12 @@
     <ClInclude Include="PaymentW.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="UserW.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ParkingW.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TPLPMS.cpp">
@@ -54,6 +60,12 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="PaymentW.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="UserW.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ParkingW.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
