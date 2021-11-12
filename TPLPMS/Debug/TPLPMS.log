@@ -1,22 +1,8 @@
 ﻿  AdminW.cpp
-D:\TPLPMS\TPLPMS\resource.h(32,1): warning C4005: “IDCANCEL”: 宏重定义
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\winuser.h(11118): message : 参见“IDCANCEL”的前一个定义
   ParkingW.cpp
-D:\TPLPMS\TPLPMS\resource.h(32,1): warning C4005: “IDCANCEL”: 宏重定义
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\winuser.h(11118): message : 参见“IDCANCEL”的前一个定义
   PaymentW.cpp
-D:\TPLPMS\TPLPMS\resource.h(32,1): warning C4005: “IDCANCEL”: 宏重定义
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\winuser.h(11118): message : 参见“IDCANCEL”的前一个定义
   TPLPMS.cpp
-D:\TPLPMS\TPLPMS\resource.h(32,1): warning C4005: “IDCANCEL”: 宏重定义
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\winuser.h(11118): message : 参见“IDCANCEL”的前一个定义
   TPLPMSDlg.cpp
-D:\TPLPMS\TPLPMS\resource.h(32,1): warning C4005: “IDCANCEL”: 宏重定义
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\winuser.h(11118): message : 参见“IDCANCEL”的前一个定义
   UserW.cpp
-D:\TPLPMS\TPLPMS\resource.h(32,1): warning C4005: “IDCANCEL”: 宏重定义
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\winuser.h(11118): message : 参见“IDCANCEL”的前一个定义
   正在生成代码...
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\winuser.rh(1434): warning RC4005: 'IDCANCEL' : redefinition
-  
   TPLPMS.vcxproj -> D:\TPLPMS\Debug\TPLPMS.exe
