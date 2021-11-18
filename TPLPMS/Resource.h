@@ -9,6 +9,7 @@
 #define IDD_AdminW                      103
 #define IDD_UserW                       104
 #define IDD_ParkingW                    105
+#define IDD_ExistingW                   107
 #define IDR_MAINFRAME                   128
 #define IDB_BITMAP1                     134
 #define IDB_BITMAP2                     137
@@ -18,7 +19,7 @@
 #define IDC_EDIT_AWtime                 1001
 #define IDC_EDIT1_UW                    1001
 #define IDC_EDIT1_UWTime                1001
-#define IDC_EDIT2                       1002
+#define IDC_information                 1002
 #define IDC_CHECK1                      1003
 #define IDC_CHECK_Admin                 1003
 #define IDC_CHECK2                      1004
@@ -72,14 +73,51 @@
 #define IDC_A22                         1080
 #define IDC_A24                         1083
 #define IDC_A36                         1096
+#define IDC_B1                          1097
+#define IDC_B2                          1098
+#define IDC_B3                          1099
+#define IDC_B4                          1100
+#define IDC_B5                          1101
+#define IDC_B6                          1102
+#define IDC_B7                          1103
+#define IDC_B8                          1104
+#define IDC_B9                          1105
+#define IDC_B10                         1106
+#define IDC_B11                         1107
+#define IDC_B12                         1108
+#define IDC_B13                         1109
+#define IDC_B14                         1110
+#define IDC_B15                         1111
+#define IDC_B16                         1112
+#define IDC_B17                         1113
+#define IDC_B18                         1114
+#define IDC_B19                         1115
+#define IDC_B20                         1116
+#define IDC_B21                         1117
+#define IDC_B22                         1118
+#define IDC_B23                         1119
+#define IDC_B24                         1120
+#define IDC_B25                         1121
+#define IDC_B26                         1122
+#define IDC_B27                         1123
+#define IDC_B28                         1124
+#define IDC_B29                         1125
+#define IDC_B30                         1126
+#define IDC_B31                         1127
+#define IDC_B32                         1128
+#define IDC_B33                         1129
+#define IDC_B34                         1130
+#define IDC_B35                         1131
+#define IDC_B36                         1132
+#define IDC_Back                        1133
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        149
+#define _APS_NEXT_RESOURCE_VALUE        151
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1097
-#define _APS_NEXT_SYMED_VALUE           107
+#define _APS_NEXT_CONTROL_VALUE         1134
+#define _APS_NEXT_SYMED_VALUE           108
 #endif
 #endif

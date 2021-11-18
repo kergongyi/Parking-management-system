@@ -45,6 +45,9 @@
     <ClInclude Include="ParkingW.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="ExistingW.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TPLPMS.cpp">
@@ -66,6 +69,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="ParkingW.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ExistingW.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

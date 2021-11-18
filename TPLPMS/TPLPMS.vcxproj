@@ -184,6 +184,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AdminW.h" />
+    <ClInclude Include="ExistingW.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="ParkingW.h" />
     <ClInclude Include="PaymentW.h" />
@@ -196,6 +197,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AdminW.cpp" />
+    <ClCompile Include="ExistingW.cpp" />
     <ClCompile Include="ParkingW.cpp" />
     <ClCompile Include="PaymentW.cpp" />
     <ClCompile Include="pch.cpp">
