@@ -16,6 +16,7 @@
 #endif
 
 
+
 // 用于应用程序“关于”菜单项的 CAboutDlg 对话框
 
 class CAboutDlg : public CDialogEx
@@ -71,6 +72,7 @@ BEGIN_MESSAGE_MAP(CTPLPMSDlg, CDialogEx)
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
 	ON_BN_CLICKED(IDC_BUTTON1, &CTPLPMSDlg::OnBnClickedButton1)
+	ON_BN_CLICKED(IDC_BUTTON2, &CTPLPMSDlg::OnBnClickedButton2)
 END_MESSAGE_MAP()
 
 
@@ -224,6 +226,9 @@ void CTPLPMSDlg::OnBnClickedButton1()
 					break;
 				}
 				if (strname == DBname && strpassword == DBpassword && identity1 == 0 && identity2 == 1) {
+					CTPLPMSApp* app = (CTPLPMSApp*)AfxGetApp();
+					app->username = strname;
+					AfxMessageBox(app->username);
 					login = 1;
 					UserW dlg;
 					this->ShowWindow(SW_HIDE);
@@ -242,3 +247,44 @@ void CTPLPMSDlg::OnBnClickedButton1()
 		CoUninitialize();
 }
 
+
+
+void CTPLPMSDlg::OnBnClickedButton2()
+{
+	CString strname;
+	CString strpassword;
+	int identity1 = ((CButton*)GetDlgItem(IDC_CHECK_Admin))->GetCheck();//check boxx
+	int identity2 = ((CButton*)GetDlgItem(IDC_CHECK_User))->GetCheck();
+
+	GetDlgItemText(IDC_EDIT_Name, strname);
+	GetDlgItemText(IDC_EDIT_Password, strpassword);
+
+	if ((identity1 == 1 && identity2 == 1) || (identity1 == 0 && identity2 == 0)) {
+		AfxMessageBox(_T("Identity wrong"));
+		return;
+	}
+
+	if (identity1 == 1 && identity2 == 0) {
+		AfxMessageBox(_T("Please do not register as an Admin"));
+	}
+	else if (identity1 == 0 && identity2 == 1) {
+		CString strSQL;
+		strSQL.Format(_T("insert into dbo.[User](Name,Password)values('%s','%s')"), strname, strpassword);
+
+		HRESULT hr;
+		hr = CoInitialize(NULL);
+		_ConnectionPtr m_pConnection;
+		m_pConnection.CreateInstance(__uuidof(Connection));
+		_bstr_t strConnection = "Provider=SQLOLEDB.1;Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=Parking;Data Source=LAPTOP-O4FIFM3Q";//connecting string used to connect database
+		if (SUCCEEDED(m_pConnection->Open(strConnection, _T(""), _T(""), adConnectUnspecified)))//open database
+		{
+			AfxMessageBox(_T("Succeed to connect database"));
+			m_pConnection->Execute((_bstr_t)strSQL, NULL, adCmdText);
+			AfxMessageBox(_T("Succeed registered"));
+			m_pConnection->Close();
+			CoUninitialize();
+		}
+	}
+
+	
+}

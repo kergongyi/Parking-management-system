@@ -18,6 +18,7 @@
 class CTPLPMSApp : public CWinApp
 {
 public:
+	CString username;
 	CTPLPMSApp();
 
 // 重写

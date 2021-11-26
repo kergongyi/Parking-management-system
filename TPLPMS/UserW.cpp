@@ -6,6 +6,9 @@
 #include "UserW.h"
 #include "afxdialogex.h"
 #include "ParkingW.h"
+#include "TPLPMSDlg.h"
+#include "RequestW.h"
+
 
 
 // UserW 对话框
@@ -25,7 +28,7 @@ UserW::~UserW()
 void UserW::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
-	DDX_Control(pDX, IDC_COMBO1, u_combobox);
+	DDX_Control(pDX, IDC_COMBOUser, u_combobox);
 }
 
 
@@ -52,7 +55,8 @@ BOOL UserW::OnInitDialog()
 	CTime cTime = CTime::GetCurrentTime();
 	CString strTime;
 	strTime = cTime.Format("%Y-%m-%d   %X");
-	SetDlgItemText(IDC_EDIT1_UWTime, strTime+"    Dear User,Thank you for your using.");
+	CTPLPMSApp* app = (CTPLPMSApp*)AfxGetApp();
+	SetDlgItemText(IDC_EDIT1_UWTime, strTime + "    Dear " + app->username + ", Thank you for your using.");
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 				  // 异常: OCX 属性页应返回 FALSE
@@ -75,19 +79,26 @@ void UserW::OnPaint()
 
 void UserW::OnBnClickedButton1()
 {
-	// TODO: 在此添加控件通知处理程序代码
 	CString combobox;
-	CString License; 
-	CString Phone;
-	CString Name;
+	GetDlgItem(IDC_COMBOUser)->GetWindowText(combobox);
+	if (combobox == "Choose it to parking") 
+	{
+		// TODO: 在此添加控件通知处理程序代码
+		CString License;
+		CString Phone;
+		CString Name;
+		CTPLPMSApp* app = (CTPLPMSApp*)AfxGetApp();
+		CString Username = app->username;
+		CTime cTime = CTime::GetCurrentTime();
+		CString strTime;
+		strTime = cTime.Format("%Y-%m-%d");
 
-	GetDlgItemText(IDC_EDIT2_License, License);
-	GetDlgItemText(IDC_EDIT3_Phone, Phone);
-	GetDlgItemText(IDC_EDIT4_Name, Name);
-	GetDlgItem(IDC_COMBO1)->GetWindowText(combobox);
-
-	CString strSQL;
-	strSQL.Format(_T("insert into dbo.Plot(License,Phone,Name)values('%s','%s','%s')"), License, Phone, Name);
+		GetDlgItemText(IDC_EDIT2_License, License);
+		GetDlgItemText(IDC_EDIT3_Phone, Phone);
+		GetDlgItemText(IDC_EDIT4_Name, Name);
+		
+		CString strSQL;
+		strSQL.Format(_T("insert into dbo.Plot(License,Phone,Name,Username,Starttime)values('%s','%s','%s','%s','%s')"), License, Phone, Name, Username, strTime);
 
 		HRESULT hr;
 		hr = CoInitialize(NULL);
@@ -97,16 +108,21 @@ void UserW::OnBnClickedButton1()
 		if (SUCCEEDED(m_pConnection->Open(strConnection, _T(""), _T(""), adConnectUnspecified)))//open database
 		{
 			AfxMessageBox(_T("Succeed to connect database"));
-		}
-		if (combobox=="Choose it to parking") {
 			m_pConnection->Execute((_bstr_t)strSQL, NULL, adCmdText);
 			AfxMessageBox(_T("Succeed to insert data"));
 			m_pConnection->Close();
 			CoUninitialize();
+			ParkingW dlg;
+			this->ShowWindow(SW_HIDE);
+			dlg.DoModal();
 		}
-		ParkingW dlg;
+	}
+	else if (combobox == "Choose it to pay the bill")
+	{
+		RequestW dlg;
 		this->ShowWindow(SW_HIDE);
 		dlg.DoModal();
-		}
+	}
+}
 
 

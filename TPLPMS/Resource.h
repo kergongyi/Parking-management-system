@@ -10,6 +10,7 @@
 #define IDD_UserW                       104
 #define IDD_ParkingW                    105
 #define IDD_ExistingW                   107
+#define IDD_RequestW                    108
 #define IDR_MAINFRAME                   128
 #define IDB_BITMAP1                     134
 #define IDB_BITMAP2                     137
@@ -19,6 +20,8 @@
 #define IDC_EDIT_AWtime                 1001
 #define IDC_EDIT1_UW                    1001
 #define IDC_EDIT1_UWTime                1001
+#define IDC_EDIT_Money                  1001
+#define IDC_EDIT2                       1002
 #define IDC_information                 1002
 #define IDC_CHECK1                      1003
 #define IDC_CHECK_Admin                 1003
@@ -31,7 +34,7 @@
 #define IDC_EDIT_Name                   1009
 #define IDC_EDIT_Password               1010
 #define IDC_A1                          1012
-#define IDC_COMBO1                      1013
+#define IDC_COMBOUser                   1013
 #define IDC_EDIT3                       1014
 #define IDC_EDIT3_Phone                 1014
 #define IDC_EDIT4                       1015
@@ -110,14 +113,16 @@
 #define IDC_B35                         1131
 #define IDC_B36                         1132
 #define IDC_Back                        1133
+#define IDC_STATIC_Totalfees            1134
+#define IDC_COMBOFees                   1136
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        151
+#define _APS_NEXT_RESOURCE_VALUE        152
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1134
-#define _APS_NEXT_SYMED_VALUE           108
+#define _APS_NEXT_CONTROL_VALUE         1137
+#define _APS_NEXT_SYMED_VALUE           109
 #endif
 #endif

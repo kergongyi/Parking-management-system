@@ -38,4 +38,5 @@ public:
 	afx_msg void OnBnClickedButton1();
 	CStatic m_static;
 	CFont m_SWTitle;//Title
+	afx_msg void OnBnClickedButton2();
 };
