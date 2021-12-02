@@ -1,13 +1,11 @@
-﻿// RequestW.cpp: 实现文件
-//
-
-#include "pch.h"
+﻿#include "pch.h"
 #include "TPLPMS.h"
 #include "RequestW.h"
 #include "afxdialogex.h"
+#include "TPLPMSDlg.h"
 
 
-// RequestW 对话框
+
 
 IMPLEMENT_DYNAMIC(RequestW, CDialogEx)
 
@@ -24,8 +22,45 @@ RequestW::~RequestW()
 void RequestW::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
-	DDX_Control(pDX, IDC_STATIC_Totalfees, m_static);//used to change the size of Title--Parking Here!!!!
+	DDX_Control(pDX, IDC_STATIC_Totalfees, m_static);
 	DDX_Control(pDX, IDC_COMBOFees, u_combobox2);
+}
+
+
+BEGIN_MESSAGE_MAP(RequestW, CDialogEx)
+	
+	ON_WM_PAINT()
+	ON_BN_CLICKED(IDC_BUTTON2, &RequestW::OnBnClickedButton2)
+	ON_BN_CLICKED(IDC_BUTTON1, &RequestW::OnBnClickedButton1)
+END_MESSAGE_MAP()
+
+
+
+
+//draw background
+void RequestW::OnPaint()
+{
+	CPaintDC dc(this);
+
+	CBitmap   background;                            //Defind the bit map
+	background.LoadBitmap(IDB_BITMAP2);
+	CBrush   brush; //The CBrush brush is mainly used to modify the filling content inside a closed graphic, including the fill color, fill shadow, and fill bitmap.
+	brush.CreatePatternBrush(&background);       ////import backgroud
+	CBrush* bgbrush = dc.SelectObject(&brush);
+	dc.Rectangle(0, 0, 1000, 1000);                  //size
+	dc.SelectObject(bgbrush);
+}
+
+
+
+
+//Initialize window
+BOOL RequestW::OnInitDialog()
+{
+	CDialogEx::OnInitDialog();
+
+	m_Totalfees.CreatePointFont(220, _T("黑体"), NULL);//set the new size for title
+	GetDlgItem(IDC_STATIC_Totalfees)->SetFont(&m_Totalfees);
 
 	HRESULT hr;
 	hr = CoInitialize(NULL);
@@ -60,58 +95,20 @@ void RequestW::DoDataExchange(CDataExchange* pDX)
 		PLotID = record->GetCollect(_T("PLotID"));
 		Username = record->GetCollect(_T("Username"));
 		Starttime = record->GetCollect(_T("Starttime"));
-		
-		u_combobox2.AddString(Starttime + _T(",") + License + _T(",") + Phone + _T(",") + Name +_T(",") + PLotID + _T(",") + Username +_T(","));
-		//u_combobox2.AddString(_T("Test4444"));
-		
+
+		u_combobox2.AddString(Starttime + _T(",") + License + _T(",") + Phone + _T(",") + Name + _T(",") + PLotID + _T(",") + Username + _T(","));
+
 		record->MoveNext();
 	}
 	record->Close();
 	m_pConnection->Close();
 	//close connection
 	CoUninitialize();
+
+	return TRUE;
 }
 
-
-BEGIN_MESSAGE_MAP(RequestW, CDialogEx)
-	
-	ON_WM_PAINT()
-	ON_BN_CLICKED(IDC_BUTTON2, &RequestW::OnBnClickedButton2)
-	ON_BN_CLICKED(IDC_BUTTON1, &RequestW::OnBnClickedButton1)
-END_MESSAGE_MAP()
-
-
-// RequestW 消息处理程序
-
-
-
-void RequestW::OnPaint()
-{
-	CPaintDC dc(this);
-
-	CBitmap   background;                            //Defind the bit map
-	background.LoadBitmap(IDB_BITMAP2);
-	CBrush   brush; //The CBrush brush is mainly used to modify the filling content inside a closed graphic, including the fill color, fill shadow, and fill bitmap.
-	brush.CreatePatternBrush(&background);       ////import backgroud
-	CBrush* bgbrush = dc.SelectObject(&brush);
-	dc.Rectangle(0, 0, 1000, 1000);                  //size
-	dc.SelectObject(bgbrush);		   // 不为绘图消息调用 CDialogEx::OnPaint()
-}
-
-
-BOOL RequestW::OnInitDialog()
-{
-	CDialogEx::OnInitDialog();
-
-	// TODO:  在此添加额外的初始化
-	m_Totalfees.CreatePointFont(220, _T("黑体"), NULL);//set the new size for title
-	GetDlgItem(IDC_STATIC_Totalfees)->SetFont(&m_Totalfees);
-
-	return TRUE;  // return TRUE unless you set the focus to a control
-				  // 异常: OCX 属性页应返回 FALSE
-}
-
-
+//calculate money
 void RequestW::OnBnClickedButton2()
 {
 	CString combobox;
@@ -121,7 +118,6 @@ void RequestW::OnBnClickedButton2()
 	int Position = 0;
 	CString Date;
 	Date = combobox.Tokenize(Seperator, Position);
-	//AfxMessageBox(Token);
 
 	CString Seperator2 = _T("-");
 	int Position2 = 0;
@@ -157,6 +153,9 @@ void RequestW::OnBnClickedButton2()
 }
 
 
+
+
+//write information to request table
 void RequestW::OnBnClickedButton1()
 {
 	CString License;
@@ -196,5 +195,9 @@ void RequestW::OnBnClickedButton1()
 		m_pConnection->Close();
 		CoUninitialize();
 	}
+
+	CTPLPMSDlg dlg;
+	this->ShowWindow(SW_HIDE);
+	dlg.DoModal();
 }
 

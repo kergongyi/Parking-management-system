@@ -1,13 +1,11 @@
-﻿// ParkingW.cpp: 实现文件
-//
-
-#include "pch.h"
+﻿#include "pch.h"
 #include "TPLPMS.h"
 #include "ParkingW.h"
 #include "afxdialogex.h"
+#include "TPLPMSDlg.h"
 
 
-// ParkingW 对话框
+
 
 IMPLEMENT_DYNAMIC(ParkingW, CDialogEx)
 
@@ -108,15 +106,11 @@ BEGIN_MESSAGE_MAP(ParkingW, CDialogEx)
 END_MESSAGE_MAP()
 
 
-// ParkingW 消息处理程序
 
-
-
+//Initialize window
 BOOL ParkingW::OnInitDialog()
 {
 	CDialogEx::OnInitDialog();
-
-	// TODO:  在此添加额外的初始化
 
 	HRESULT hr;
 	hr = CoInitialize(NULL);
@@ -284,7 +278,7 @@ BOOL ParkingW::OnInitDialog()
 			A36control.SetFaceColor(RGB(0, 255, 0));
 		}
 
-		if (temp.vt != VT_NULL) 
+		if (temp.vt != VT_NULL)
 		{
 			PLotID = record->GetCollect(_T("PLotID"));
 			if (PLotID == _T("A1"))
@@ -393,57 +387,56 @@ BOOL ParkingW::OnInitDialog()
 			}
 			else if (PLotID == _T("A27"))
 			{
-			    A27control.SetFaceColor(RGB(255, 0, 0));
+				A27control.SetFaceColor(RGB(255, 0, 0));
 			}
 			else if (PLotID == _T("A28"))
 			{
-			    A28control.SetFaceColor(RGB(255, 0, 0));
+				A28control.SetFaceColor(RGB(255, 0, 0));
 			}
 			else if (PLotID == _T("A29"))
 			{
-			    A29control.SetFaceColor(RGB(255, 0, 0));
+				A29control.SetFaceColor(RGB(255, 0, 0));
 			}
 			else if (PLotID == _T("A30"))
 			{
-			    A30control.SetFaceColor(RGB(255, 0, 0));
+				A30control.SetFaceColor(RGB(255, 0, 0));
 			}
 			else if (PLotID == _T("A31"))
 			{
-			    A31control.SetFaceColor(RGB(255, 0, 0));
+				A31control.SetFaceColor(RGB(255, 0, 0));
 			}
 			else if (PLotID == _T("A32"))
 			{
-			    A32control.SetFaceColor(RGB(255, 0, 0));
+				A32control.SetFaceColor(RGB(255, 0, 0));
 			}
 			else if (PLotID == _T("A33"))
 			{
-			    A33control.SetFaceColor(RGB(255, 0, 0));
+				A33control.SetFaceColor(RGB(255, 0, 0));
 			}
 			else if (PLotID == _T("A34"))
 			{
-			    A34control.SetFaceColor(RGB(255, 0, 0));
+				A34control.SetFaceColor(RGB(255, 0, 0));
 			}
 			else if (PLotID == _T("A35"))
 			{
-			    A35control.SetFaceColor(RGB(255, 0, 0));
+				A35control.SetFaceColor(RGB(255, 0, 0));
 			}
 			else if (PLotID == _T("A36"))
 			{
-			    A36control.SetFaceColor(RGB(255, 0, 0));
+				A36control.SetFaceColor(RGB(255, 0, 0));
 			}
 		}
-			state += 1;
+		state += 1;
 		record->MoveNext();
 	}
 	m_pConnection->Close();
 	CoUninitialize();
-	
-	return TRUE;  // return TRUE unless you set the focus to a control
-				  // 异常: OCX 属性页应返回 FALSE
+
+	return TRUE;
 }
 
 
-void ParkingW::OnPaint()
+void ParkingW::OnPaint()//draw background
 {
 	CPaintDC dc(this); // device context for painting
 
@@ -453,11 +446,11 @@ void ParkingW::OnPaint()
 	brush.CreatePatternBrush(&background);       ////import backgroud
 	CBrush* bgbrush = dc.SelectObject(&brush);
 	dc.Rectangle(0, 0, 1300, 1300);                  //size
-	dc.SelectObject(bgbrush);	   // 不为绘图消息调用 CDialogEx::OnPaint()
+	dc.SelectObject(bgbrush);
 }
 
 
-void insert(CString x) {
+void insert(CString x) {//choose position and write parking information into database
 	CString strSQL;
 	strSQL.Format(_T("update dbo.Plot set PLotID = '%s' where Plot.ID = (SELECT max(ID) FROM dbo.Plot)"), x);
 
@@ -475,13 +468,15 @@ void insert(CString x) {
 	AfxMessageBox(_T("Succeed to insert data"));
 	m_pConnection->Close();
 	CoUninitialize();
-
 }
 
 void ParkingW::OnBnClickedA1()
 {
 	CString a1 = _T("A1");
 	insert(a1);
+	CTPLPMSDlg dlg;
+	this->ShowWindow(SW_HIDE);
+	dlg.DoModal();
 }
 
 
@@ -489,6 +484,9 @@ void ParkingW::OnBnClickedA2()
 {
 	CString a2 = _T("A2");
 	insert(a2);
+	CTPLPMSDlg dlg;
+	this->ShowWindow(SW_HIDE);
+	dlg.DoModal();
 }
 
 
@@ -496,6 +494,9 @@ void ParkingW::OnBnClickedA3()
 {
 	CString a3 = _T("A3");
 	insert(a3);
+	CTPLPMSDlg dlg;
+	this->ShowWindow(SW_HIDE);
+	dlg.DoModal();
 }
 
 
@@ -503,6 +504,9 @@ void ParkingW::OnBnClickedA4()
 {
 	CString a4 = _T("A4");
 	insert(a4);
+	CTPLPMSDlg dlg;
+	this->ShowWindow(SW_HIDE);
+	dlg.DoModal();
 }
 
 
@@ -510,190 +514,286 @@ void ParkingW::OnBnClickedA5()
 {
 	CString a5 = _T("A5");
 	insert(a5);
+	CTPLPMSDlg dlg;
+	this->ShowWindow(SW_HIDE);
+	dlg.DoModal();
 }
 
 void ParkingW::OnBnClickedA6()
 {
 	CString a6 = _T("A6");
 	insert(a6);
+	CTPLPMSDlg dlg;
+	this->ShowWindow(SW_HIDE);
+	dlg.DoModal();
 }
 
 void ParkingW::OnBnClickedA7()
 {
 	CString a7 = _T("A7");
 	insert(a7);
+	CTPLPMSDlg dlg;
+	this->ShowWindow(SW_HIDE);
+	dlg.DoModal();
 }
 
 void ParkingW::OnBnClickedA8()
 {
 	CString a8 = _T("A8");
 	insert(a8);
+	CTPLPMSDlg dlg;
+	this->ShowWindow(SW_HIDE);
+	dlg.DoModal();
 }
 
 void ParkingW::OnBnClickedA9()
 {
 	CString a9 = _T("A9");
 	insert(a9);
+	CTPLPMSDlg dlg;
+	this->ShowWindow(SW_HIDE);
+	dlg.DoModal();
 }
 
 void ParkingW::OnBnClickedA10()
 {
 	CString a10 = _T("A10");
 	insert(a10);
+	CTPLPMSDlg dlg;
+	this->ShowWindow(SW_HIDE);
+	dlg.DoModal();
 }
 
 void ParkingW::OnBnClickedA11()
 {
 	CString a11 = _T("A11");
 	insert(a11);
+	CTPLPMSDlg dlg;
+	this->ShowWindow(SW_HIDE);
+	dlg.DoModal();
 }
 
 void ParkingW::OnBnClickedA12()
 {
 	CString a12 = _T("A12");
 	insert(a12);
+	CTPLPMSDlg dlg;
+	this->ShowWindow(SW_HIDE);
+	dlg.DoModal();
 }
 
 void ParkingW::OnBnClickedA13()
 {
 	CString a13 = _T("A13");
 	insert(a13);
+	CTPLPMSDlg dlg;
+	this->ShowWindow(SW_HIDE);
+	dlg.DoModal();
 }
 
 void ParkingW::OnBnClickedA14()
 {
 	CString a14 = _T("A14");
 	insert(a14);
+	CTPLPMSDlg dlg;
+	this->ShowWindow(SW_HIDE);
+	dlg.DoModal();
 }
 
 void ParkingW::OnBnClickedA15()
 {
 	CString a15 = _T("A15");
 	insert(a15);
+	CTPLPMSDlg dlg;
+	this->ShowWindow(SW_HIDE);
+	dlg.DoModal();
 }
 
 void ParkingW::OnBnClickedA16()
 {
 	CString a16 = _T("A16");
 	insert(a16);
+	CTPLPMSDlg dlg;
+	this->ShowWindow(SW_HIDE);
+	dlg.DoModal();
 }
 
 void ParkingW::OnBnClickedA17()
 {
 	CString a17 = _T("A17");
 	insert(a17);
+	CTPLPMSDlg dlg;
+	this->ShowWindow(SW_HIDE);
+	dlg.DoModal();
 }
 
 void ParkingW::OnBnClickedA18()
 {
 	CString a18 = _T("A18");
 	insert(a18);
+	CTPLPMSDlg dlg;
+	this->ShowWindow(SW_HIDE);
+	dlg.DoModal();
 }
 
 void ParkingW::OnBnClickedA19()
 {
 	CString a19 = _T("A19");
 	insert(a19);
+	CTPLPMSDlg dlg;
+	this->ShowWindow(SW_HIDE);
+	dlg.DoModal();
 }
 
 void ParkingW::OnBnClickedA20()
 {
 	CString a20 = _T("A20");
 	insert(a20);
+	CTPLPMSDlg dlg;
+	this->ShowWindow(SW_HIDE);
+	dlg.DoModal();
 }
 
 void ParkingW::OnBnClickedA21()
 {
 	CString a21 = _T("A21");
 	insert(a21);
+	CTPLPMSDlg dlg;
+	this->ShowWindow(SW_HIDE);
+	dlg.DoModal();
 }
 
 void ParkingW::OnBnClickedA22()
 {
 	CString a22 = _T("A22");
 	insert(a22);
+	CTPLPMSDlg dlg;
+	this->ShowWindow(SW_HIDE);
+	dlg.DoModal();
 }
 
 void ParkingW::OnBnClickedA23()
 {
 	CString a23 = _T("A23");
 	insert(a23);
+	CTPLPMSDlg dlg;
+	this->ShowWindow(SW_HIDE);
+	dlg.DoModal();
 }
 
 void ParkingW::OnBnClickedA24()
 {
 	CString a24 = _T("A24");
 	insert(a24);
+	CTPLPMSDlg dlg;
+	this->ShowWindow(SW_HIDE);
+	dlg.DoModal();
 }
 
 void ParkingW::OnBnClickedA25()
 {
 	CString a25 = _T("A25");
 	insert(a25);
+	CTPLPMSDlg dlg;
+	this->ShowWindow(SW_HIDE);
+	dlg.DoModal();
 }
 
 void ParkingW::OnBnClickedA26()
 {
 	CString a26 = _T("A26");
 	insert(a26);
+	CTPLPMSDlg dlg;
+	this->ShowWindow(SW_HIDE);
+	dlg.DoModal();
 }
 
 void ParkingW::OnBnClickedA27()
 {
 	CString a27 = _T("A27");
 	insert(a27);
+	CTPLPMSDlg dlg;
+	this->ShowWindow(SW_HIDE);
+	dlg.DoModal();
 }
 
 void ParkingW::OnBnClickedA28()
 {
 	CString a28 = _T("A28");
 	insert(a28);
+	CTPLPMSDlg dlg;
+	this->ShowWindow(SW_HIDE);
+	dlg.DoModal();
 }
 
 void ParkingW::OnBnClickedA29()
 {
 	CString a29 = _T("A29");
 	insert(a29);
+	CTPLPMSDlg dlg;
+	this->ShowWindow(SW_HIDE);
+	dlg.DoModal();
 }
 
 void ParkingW::OnBnClickedA30()
 {
 	CString a30 = _T("A30");
 	insert(a30);
+	CTPLPMSDlg dlg;
+	this->ShowWindow(SW_HIDE);
+	dlg.DoModal();
 }
 
 void ParkingW::OnBnClickedA31()
 {
 	CString a31 = _T("A31");
 	insert(a31);
+	CTPLPMSDlg dlg;
+	this->ShowWindow(SW_HIDE);
+	dlg.DoModal();
 }
 
 void ParkingW::OnBnClickedA32()
 {
 	CString a32 = _T("A32");
 	insert(a32);
+	CTPLPMSDlg dlg;
+	this->ShowWindow(SW_HIDE);
+	dlg.DoModal();
 }
 
 void ParkingW::OnBnClickedA33()
 {
 	CString a33 = _T("A33");
 	insert(a33);
+	CTPLPMSDlg dlg;
+	this->ShowWindow(SW_HIDE);
+	dlg.DoModal();
 }
 
 void ParkingW::OnBnClickedA34()
 {
 	CString a34 = _T("A34");
 	insert(a34);
+	CTPLPMSDlg dlg;
+	this->ShowWindow(SW_HIDE);
+	dlg.DoModal();
 }
 
 void ParkingW::OnBnClickedA35()
 {
 	CString a35 = _T("A35");
 	insert(a35);
+	CTPLPMSDlg dlg;
+	this->ShowWindow(SW_HIDE);
+	dlg.DoModal();
 }
 
 void ParkingW::OnBnClickedA36()
 {
 	CString a36 = _T("A36");
 	insert(a36);
+	CTPLPMSDlg dlg;
+	this->ShowWindow(SW_HIDE);
+	dlg.DoModal();
 }

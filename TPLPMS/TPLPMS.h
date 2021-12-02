@@ -1,5 +1,5 @@
 ﻿
-// TPLPMS.h: PROJECT_NAME 应用程序的主头文件
+// TPLPMS.h: The main header file of the application
 //
 
 #pragma once
@@ -8,12 +8,7 @@
 	#error "在包含此文件之前包含 'pch.h' 以生成 PCH"
 #endif
 
-#include "resource.h"		// 主符号
-
-
-// CTPLPMSApp:
-// 有关此类的实现，请参阅 TPLPMS.cpp
-//
+#include "resource.h"		
 
 class CTPLPMSApp : public CWinApp
 {
@@ -21,11 +16,8 @@ public:
 	CString username;
 	CTPLPMSApp();
 
-// 重写
 public:
 	virtual BOOL InitInstance();
-
-// 实现
 
 	DECLARE_MESSAGE_MAP()
 };

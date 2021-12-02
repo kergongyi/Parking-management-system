@@ -1,14 +1,11 @@
-﻿// ExistingW.cpp: 实现文件
-//
-
-#include "pch.h"
+﻿#include "pch.h"
 #include "TPLPMS.h"
 #include "ExistingW.h"
 #include "afxdialogex.h"
 #include "AdminW.h"
 
 
-// ExistingW 对话框
+
 
 IMPLEMENT_DYNAMIC(ExistingW, CDialogEx)
 
@@ -107,12 +104,9 @@ BEGIN_MESSAGE_MAP(ExistingW, CDialogEx)
 END_MESSAGE_MAP()
 
 
-// ExistingW 消息处理程序
 
 
-
-
-void ExistingW::OnPaint()
+void ExistingW::OnPaint()//draw background
 {
 	CPaintDC dc(this); // device context for painting
 
@@ -126,7 +120,7 @@ void ExistingW::OnPaint()
 }
 
 
-void read(CString x) {
+void read(CString x) {//read cars' information and print them
 	CString strSQL;
 	//strSQL.Format(_T("select * from dbo.Plot where PLotID = '@s'"), x);
 	HRESULT hr;
@@ -165,11 +159,11 @@ void read(CString x) {
 	CoUninitialize();
 }
 
+//Initialize window
 BOOL ExistingW::OnInitDialog()
 {
 	CDialogEx::OnInitDialog();
 
-	// TODO:  在此添加额外的初始化
 	HRESULT hr;
 	hr = CoInitialize(NULL);
 
@@ -186,156 +180,155 @@ BOOL ExistingW::OnInitDialog()
 	CString PLotID;
 	_variant_t temp;
 	int state = 0;
+	if (state == 0) // no cars
+	{
+		B1control.m_bDontUseWinXPTheme = TRUE;
+		B1control.m_bDrawFocus = false;
+		B1control.SetFaceColor(RGB(0, 255, 0));
+
+		B2control.m_bDontUseWinXPTheme = TRUE;
+		B2control.m_bDrawFocus = false;
+		B2control.SetFaceColor(RGB(0, 255, 0));
+
+		B3control.m_bDontUseWinXPTheme = TRUE;
+		B3control.m_bDrawFocus = false;
+		B3control.SetFaceColor(RGB(0, 255, 0));
+
+		B4control.m_bDontUseWinXPTheme = TRUE;
+		B4control.m_bDrawFocus = false;
+		B4control.SetFaceColor(RGB(0, 255, 0));
+
+		B5control.m_bDontUseWinXPTheme = TRUE;
+		B5control.m_bDrawFocus = false;
+		B5control.SetFaceColor(RGB(0, 255, 0));
+
+		B6control.m_bDontUseWinXPTheme = TRUE;
+		B6control.m_bDrawFocus = false;
+		B6control.SetFaceColor(RGB(0, 255, 0));
+
+		B7control.m_bDontUseWinXPTheme = TRUE;
+		B7control.m_bDrawFocus = false;
+		B7control.SetFaceColor(RGB(0, 255, 0));
+
+		B8control.m_bDontUseWinXPTheme = TRUE;
+		B8control.m_bDrawFocus = false;
+		B8control.SetFaceColor(RGB(0, 255, 0));
+
+		B9control.m_bDontUseWinXPTheme = TRUE;
+		B9control.m_bDrawFocus = false;
+		B9control.SetFaceColor(RGB(0, 255, 0));
+
+		B10control.m_bDontUseWinXPTheme = TRUE;
+		B10control.m_bDrawFocus = false;
+		B10control.SetFaceColor(RGB(0, 255, 0));
+
+		B11control.m_bDontUseWinXPTheme = TRUE;
+		B11control.m_bDrawFocus = false;
+		B11control.SetFaceColor(RGB(0, 255, 0));
+
+		B12control.m_bDontUseWinXPTheme = TRUE;
+		B12control.m_bDrawFocus = false;
+		B12control.SetFaceColor(RGB(0, 255, 0));
+
+		B13control.m_bDontUseWinXPTheme = TRUE;
+		B13control.m_bDrawFocus = false;
+		B13control.SetFaceColor(RGB(0, 255, 0));
+
+		B14control.m_bDontUseWinXPTheme = TRUE;
+		B14control.m_bDrawFocus = false;
+		B14control.SetFaceColor(RGB(0, 255, 0));
+
+		B15control.m_bDontUseWinXPTheme = TRUE;
+		B15control.m_bDrawFocus = false;
+		B15control.SetFaceColor(RGB(0, 255, 0));
+
+		B16control.m_bDontUseWinXPTheme = TRUE;
+		B16control.m_bDrawFocus = false;
+		B16control.SetFaceColor(RGB(0, 255, 0));
+
+		B17control.m_bDontUseWinXPTheme = TRUE;
+		B17control.m_bDrawFocus = false;
+		B17control.SetFaceColor(RGB(0, 255, 0));
+
+		B18control.m_bDontUseWinXPTheme = TRUE;
+		B18control.m_bDrawFocus = false;
+		B18control.SetFaceColor(RGB(0, 255, 0));
+
+		B19control.m_bDontUseWinXPTheme = TRUE;
+		B19control.m_bDrawFocus = false;
+		B19control.SetFaceColor(RGB(0, 255, 0));
+
+		B20control.m_bDontUseWinXPTheme = TRUE;
+		B20control.m_bDrawFocus = false;
+		B20control.SetFaceColor(RGB(0, 255, 0));
+
+		B21control.m_bDontUseWinXPTheme = TRUE;
+		B21control.m_bDrawFocus = false;
+		B21control.SetFaceColor(RGB(0, 255, 0));
+
+		B22control.m_bDontUseWinXPTheme = TRUE;
+		B22control.m_bDrawFocus = false;
+		B22control.SetFaceColor(RGB(0, 255, 0));
+
+		B23control.m_bDontUseWinXPTheme = TRUE;
+		B23control.m_bDrawFocus = false;
+		B23control.SetFaceColor(RGB(0, 255, 0));
+
+		B24control.m_bDontUseWinXPTheme = TRUE;
+		B24control.m_bDrawFocus = false;
+		B24control.SetFaceColor(RGB(0, 255, 0));
+
+		B25control.m_bDontUseWinXPTheme = TRUE;
+		B25control.m_bDrawFocus = false;
+		B25control.SetFaceColor(RGB(0, 255, 0));
+
+		B26control.m_bDontUseWinXPTheme = TRUE;
+		B26control.m_bDrawFocus = false;
+		B26control.SetFaceColor(RGB(0, 255, 0));
+
+		B27control.m_bDontUseWinXPTheme = TRUE;
+		B27control.m_bDrawFocus = false;
+		B27control.SetFaceColor(RGB(0, 255, 0));
+
+		B28control.m_bDontUseWinXPTheme = TRUE;
+		B28control.m_bDrawFocus = false;
+		B28control.SetFaceColor(RGB(0, 255, 0));
+
+		B29control.m_bDontUseWinXPTheme = TRUE;
+		B29control.m_bDrawFocus = false;
+		B29control.SetFaceColor(RGB(0, 255, 0));
+
+		B30control.m_bDontUseWinXPTheme = TRUE;
+		B30control.m_bDrawFocus = false;
+		B30control.SetFaceColor(RGB(0, 255, 0));
+
+		B31control.m_bDontUseWinXPTheme = TRUE;
+		B31control.m_bDrawFocus = false;
+		B31control.SetFaceColor(RGB(0, 255, 0));
+
+		B32control.m_bDontUseWinXPTheme = TRUE;
+		B32control.m_bDrawFocus = false;
+		B32control.SetFaceColor(RGB(0, 255, 0));
+
+		B33control.m_bDontUseWinXPTheme = TRUE;
+		B33control.m_bDrawFocus = false;
+		B33control.SetFaceColor(RGB(0, 255, 0));
+
+		B34control.m_bDontUseWinXPTheme = TRUE;
+		B34control.m_bDrawFocus = false;
+		B34control.SetFaceColor(RGB(0, 255, 0));
+
+		B35control.m_bDontUseWinXPTheme = TRUE;
+		B35control.m_bDrawFocus = false;
+		B35control.SetFaceColor(RGB(0, 255, 0));
+
+		B36control.m_bDontUseWinXPTheme = TRUE;
+		B36control.m_bDrawFocus = false;
+		B36control.SetFaceColor(RGB(0, 255, 0));
+	}
 	while (!record->adoEOF)
 	{
 		temp = record->GetCollect(_T("PLotID"));
-		if (state == 0) // no cars
-		{
-			B1control.m_bDontUseWinXPTheme = TRUE;
-			B1control.m_bDrawFocus = false;
-			B1control.SetFaceColor(RGB(0, 255, 0));
-
-			B2control.m_bDontUseWinXPTheme = TRUE;
-			B2control.m_bDrawFocus = false;
-			B2control.SetFaceColor(RGB(0, 255, 0));
-
-			B3control.m_bDontUseWinXPTheme = TRUE;
-			B3control.m_bDrawFocus = false;
-			B3control.SetFaceColor(RGB(0, 255, 0));
-
-			B4control.m_bDontUseWinXPTheme = TRUE;
-			B4control.m_bDrawFocus = false;
-			B4control.SetFaceColor(RGB(0, 255, 0));
-
-			B5control.m_bDontUseWinXPTheme = TRUE;
-			B5control.m_bDrawFocus = false;
-			B5control.SetFaceColor(RGB(0, 255, 0));
-
-			B6control.m_bDontUseWinXPTheme = TRUE;
-			B6control.m_bDrawFocus = false;
-			B6control.SetFaceColor(RGB(0, 255, 0));
-
-			B7control.m_bDontUseWinXPTheme = TRUE;
-			B7control.m_bDrawFocus = false;
-			B7control.SetFaceColor(RGB(0, 255, 0));
-
-			B8control.m_bDontUseWinXPTheme = TRUE;
-			B8control.m_bDrawFocus = false;
-			B8control.SetFaceColor(RGB(0, 255, 0));
-
-			B9control.m_bDontUseWinXPTheme = TRUE;
-			B9control.m_bDrawFocus = false;
-			B9control.SetFaceColor(RGB(0, 255, 0));
-
-			B10control.m_bDontUseWinXPTheme = TRUE;
-			B10control.m_bDrawFocus = false;
-			B10control.SetFaceColor(RGB(0, 255, 0));
-
-			B11control.m_bDontUseWinXPTheme = TRUE;
-			B11control.m_bDrawFocus = false;
-			B11control.SetFaceColor(RGB(0, 255, 0));
-
-			B12control.m_bDontUseWinXPTheme = TRUE;
-			B12control.m_bDrawFocus = false;
-			B12control.SetFaceColor(RGB(0, 255, 0));
-
-			B13control.m_bDontUseWinXPTheme = TRUE;
-			B13control.m_bDrawFocus = false;
-			B13control.SetFaceColor(RGB(0, 255, 0));
-
-			B14control.m_bDontUseWinXPTheme = TRUE;
-			B14control.m_bDrawFocus = false;
-			B14control.SetFaceColor(RGB(0, 255, 0));
-
-			B15control.m_bDontUseWinXPTheme = TRUE;
-			B15control.m_bDrawFocus = false;
-			B15control.SetFaceColor(RGB(0, 255, 0));
-
-			B16control.m_bDontUseWinXPTheme = TRUE;
-			B16control.m_bDrawFocus = false;
-			B16control.SetFaceColor(RGB(0, 255, 0));
-
-			B17control.m_bDontUseWinXPTheme = TRUE;
-			B17control.m_bDrawFocus = false;
-			B17control.SetFaceColor(RGB(0, 255, 0));
-
-			B18control.m_bDontUseWinXPTheme = TRUE;
-			B18control.m_bDrawFocus = false;
-			B18control.SetFaceColor(RGB(0, 255, 0));
-
-			B19control.m_bDontUseWinXPTheme = TRUE;
-			B19control.m_bDrawFocus = false;
-			B19control.SetFaceColor(RGB(0, 255, 0));
-
-			B20control.m_bDontUseWinXPTheme = TRUE;
-			B20control.m_bDrawFocus = false;
-			B20control.SetFaceColor(RGB(0, 255, 0));
-
-			B21control.m_bDontUseWinXPTheme = TRUE;
-			B21control.m_bDrawFocus = false;
-			B21control.SetFaceColor(RGB(0, 255, 0));
-
-			B22control.m_bDontUseWinXPTheme = TRUE;
-			B22control.m_bDrawFocus = false;
-			B22control.SetFaceColor(RGB(0, 255, 0));
-
-			B23control.m_bDontUseWinXPTheme = TRUE;
-			B23control.m_bDrawFocus = false;
-			B23control.SetFaceColor(RGB(0, 255, 0));
-
-			B24control.m_bDontUseWinXPTheme = TRUE;
-			B24control.m_bDrawFocus = false;
-			B24control.SetFaceColor(RGB(0, 255, 0));
-
-			B25control.m_bDontUseWinXPTheme = TRUE;
-			B25control.m_bDrawFocus = false;
-			B25control.SetFaceColor(RGB(0, 255, 0));
-
-			B26control.m_bDontUseWinXPTheme = TRUE;
-			B26control.m_bDrawFocus = false;
-			B26control.SetFaceColor(RGB(0, 255, 0));
-
-			B27control.m_bDontUseWinXPTheme = TRUE;
-			B27control.m_bDrawFocus = false;
-			B27control.SetFaceColor(RGB(0, 255, 0));
-
-			B28control.m_bDontUseWinXPTheme = TRUE;
-			B28control.m_bDrawFocus = false;
-			B28control.SetFaceColor(RGB(0, 255, 0));
-
-			B29control.m_bDontUseWinXPTheme = TRUE;
-			B29control.m_bDrawFocus = false;
-			B29control.SetFaceColor(RGB(0, 255, 0));
-
-			B30control.m_bDontUseWinXPTheme = TRUE;
-			B30control.m_bDrawFocus = false;
-			B30control.SetFaceColor(RGB(0, 255, 0));
-
-			B31control.m_bDontUseWinXPTheme = TRUE;
-			B31control.m_bDrawFocus = false;
-			B31control.SetFaceColor(RGB(0, 255, 0));
-
-			B32control.m_bDontUseWinXPTheme = TRUE;
-			B32control.m_bDrawFocus = false;
-			B32control.SetFaceColor(RGB(0, 255, 0));
-
-			B33control.m_bDontUseWinXPTheme = TRUE;
-			B33control.m_bDrawFocus = false;
-			B33control.SetFaceColor(RGB(0, 255, 0));
-
-			B34control.m_bDontUseWinXPTheme = TRUE;
-			B34control.m_bDrawFocus = false;
-			B34control.SetFaceColor(RGB(0, 255, 0));
-
-			B35control.m_bDontUseWinXPTheme = TRUE;
-			B35control.m_bDrawFocus = false;
-			B35control.SetFaceColor(RGB(0, 255, 0));
-
-			B36control.m_bDontUseWinXPTheme = TRUE;
-			B36control.m_bDrawFocus = false;
-			B36control.SetFaceColor(RGB(0, 255, 0));
-		}
-
 		if (temp.vt != VT_NULL)
 		{
 			PLotID = record->GetCollect(_T("PLotID"));
@@ -490,8 +483,7 @@ BOOL ExistingW::OnInitDialog()
 	m_pConnection->Close();
 	CoUninitialize();
 
-	return TRUE;  // return TRUE unless you set the focus to a control
-				  // 异常: OCX 属性页应返回 FALSE
+	return TRUE;
 }
 
 void ExistingW::OnBnClickedB1()
@@ -744,7 +736,7 @@ void ExistingW::OnBnClickedB36()
 }
 
 
-void ExistingW::OnBnClickedBack()
+void ExistingW::OnBnClickedBack()//jump to Admin window
 {
 	AdminW dlg1;
 	this->ShowWindow(SW_HIDE);

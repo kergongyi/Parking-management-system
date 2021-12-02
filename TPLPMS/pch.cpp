@@ -1,5 +1,5 @@
-﻿// pch.cpp: 与预编译标头对应的源文件
+﻿// pch.cpp: the source file corresponding to the precompiled header
 
 #include "pch.h"
 
-// 当使用预编译的头时，需要使用此源文件，编译才能成功。
+// When using pre-compiled headers, you need to use this source file to compile successfully.

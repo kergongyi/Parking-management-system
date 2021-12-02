@@ -1,15 +1,14 @@
-﻿// AdminW.cpp: 实现文件
-//
-
-#include "pch.h"
+﻿#include "pch.h"
 #include "TPLPMS.h"
 #include "AdminW.h"
 #include "afxdialogex.h"
 #include "PaymentW.h"
 #include "ExistingW.h"
+#include "Search.h"
+#include "TPLPMSDlg.h"
 
 
-// AdminW 对话框
+
 
 IMPLEMENT_DYNAMIC(AdminW, CDialogEx)
 
@@ -34,37 +33,31 @@ BEGIN_MESSAGE_MAP(AdminW, CDialogEx)
 	ON_WM_PAINT()
 	ON_BN_CLICKED(IDC_BUTTON2, &AdminW::OnBnClickedButton2)
 	ON_BN_CLICKED(IDC_BUTTON3, &AdminW::OnBnClickedButton3)
+	ON_BN_CLICKED(IDC_BUTTON4, &AdminW::OnBnClickedButton4)
+	ON_BN_CLICKED(IDC_BUTTON5, &AdminW::OnBnClickedButton5)
 END_MESSAGE_MAP()
 
-
-// AdminW 消息处理程序
+//Initialize window
 BOOL AdminW::OnInitDialog()
 {
 	CDialogEx::OnInitDialog();
-
-	// TODO:  在此添加额外的初始化
-
-	
-
-	return TRUE;  // return TRUE unless you set the focus to a control
-				  // 异常: OCX 属性页应返回 FALSE
+	return TRUE;
 }
 
 
-void AdminW::OnBnClickedButton1()//payment window
+void AdminW::OnBnClickedButton1()//jump to payment window
 {
 	PaymentW dlg1;
 	this->ShowWindow(SW_HIDE);
 	dlg1.DoModal();
-	// TODO: 在此添加控件通知处理程序代码
 }
 
-void AdminW::OnPaint()
+void AdminW::OnPaint()//draw background
 {
 	CPaintDC dc(this); // device context for painting
 
 	CBitmap   background;                            //Defind the bit map
-	background.LoadBitmap(IDB_BITMAP2);
+	background.LoadBitmap(IDB_BITMAP4);
 	CBrush   brush; //The CBrush brush is mainly used to modify the filling content inside a closed graphic, including the fill color, fill shadow, and fill bitmap.
 	brush.CreatePatternBrush(&background);       ////import backgroud
 	CBrush* bgbrush = dc.SelectObject(&brush);
@@ -86,6 +79,7 @@ void AdminW::OnBnClickedButton2()//refresh window
 	hr = CoInitialize(NULL);
 	_ConnectionPtr m_pConnection; //connected object for database
 	_RecordsetPtr record;//record set of database
+	_RecordsetPtr record2;//record set of database
 	m_pConnection.CreateInstance(__uuidof(Connection));
 	record.CreateInstance(__uuidof(Recordset));//create a set used to read database
 
@@ -95,26 +89,49 @@ void AdminW::OnBnClickedButton2()//refresh window
 		AfxMessageBox(_T("Succeed to connect database"));
 	}
     record = m_pConnection->Execute("SELECT * FROM dbo.Plot", NULL, adCmdText);
+	record2 = m_pConnection->Execute("SELECT * FROM dbo.Request", NULL, adCmdText);
 	int recordnumber = 0;
+	int requestnumber = 0;
 	while (!record->adoEOF) {
 		recordnumber += 1;
 		record->MoveNext();
+	}
+	while (!record2->adoEOF) {
+		requestnumber += 1;
+		record2->MoveNext();
 	}
 	m_pConnection->Close();
 	CoUninitialize();
 	int freeplace = 36 - recordnumber;
 	CString stri1;
 	CString stri2;
+	CString strirequest;
 	stri1.Format(_T("%d"), recordnumber);
 	stri2.Format(_T("%d"), freeplace);
-	SetDlgItemText(IDC_information, _T("Parking Vehicles:")+stri1+"\r\n"+_T("Free Space:")+stri2);
+	strirequest.Format(_T("%d"), requestnumber);
+	SetDlgItemText(IDC_information, _T("Parking Vehicles:")+stri1+"\r\n"+_T("Free Space:")+stri2 + "\r\n" + _T("Existing Requests:") + strirequest);
 }
 
 
-void AdminW::OnBnClickedButton3()
+void AdminW::OnBnClickedButton3()//jump to Existing window
 {
 	ExistingW dlg1;
 	this->ShowWindow(SW_HIDE);
 	dlg1.DoModal();
-	// TODO: 在此添加控件通知处理程序代码
+}
+
+
+void AdminW::OnBnClickedButton4()//jump to Search window
+{
+	Search dlg1;
+	this->ShowWindow(SW_HIDE);
+	dlg1.DoModal();
+}
+
+
+void AdminW::OnBnClickedButton5()//jump to Login window
+{
+	CTPLPMSDlg dlg1;
+	this->ShowWindow(SW_HIDE);
+	dlg1.DoModal();
 }

@@ -1,23 +1,19 @@
 ﻿#pragma once
-
-
-// ExistingW 对话框
-
 class ExistingW : public CDialogEx
 {
 	DECLARE_DYNAMIC(ExistingW)
 
 public:
-	ExistingW(CWnd* pParent = nullptr);   // 标准构造函数
+	ExistingW(CWnd* pParent = nullptr);   // construct
 	virtual ~ExistingW();
 
-// 对话框数据
+
 #ifdef AFX_DESIGN_TIME
 	enum { IDD = IDD_ExistingW };
 #endif
 
 protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV 支持
+	virtual void DoDataExchange(CDataExchange* pDX);
 
 	DECLARE_MESSAGE_MAP()
 public:
